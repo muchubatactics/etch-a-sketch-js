@@ -17,6 +17,7 @@ document.body.addEventListener("mouseup", () =>{
 //sketching
 
 let container = document.querySelector(".container");
+container.draggable = false;
 
 function draw(length)
 {
@@ -33,7 +34,8 @@ function draw(length)
             b.style.width = String((700/length) - 2) + "px";
             b.style.height = String((700/length) - 2) + "px";
             b.style.backgroundColor = "gray";
-            b.style.border = "1px solid black";
+            b.style.border = "1px solid cornsilk";
+            b.draggable = false;
             // b.style.border = "5px solid white";
             b.addEventListener("mouseover", () => {
                 if (bool)
@@ -88,5 +90,5 @@ controlPanel.appendChild(sizeButton);
 controlPanel.appendChild(resetButton);
 
 //run
-draw(60);
+draw();
 
