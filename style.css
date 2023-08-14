@@ -1,6 +1,29 @@
 body {
     height: 100vh;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+    padding: 0px;
+    margin: 0px;
+}
+
+.footer {
+    padding: 20px;
+    margin: 0px;
+    margin-top: auto;
+    background-color: antiquewhite;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: lighter;
+    font-size: large;
+}
+
+.head {
+    padding: 30px;
+    margin: 0px;
+    margin-bottom: auto;
+    background-color: antiquewhite;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: lighter;
+    font-size: xx-large;
 }

@@ -1,3 +1,10 @@
+/*
+    What if, to be, is to be percieved?
+    muchubatactics 14/08/23
+*/
+
+
+
 //sketching
 let length;
 let container = document.querySelector(".container");
@@ -32,20 +39,6 @@ function draw(length)
 
 }
 //buttons
-let housing = document.createElement("div");
-housing.style.padding = "10px";
-housing.style.backgroundColor = "cornsilk";
-housing.style.margin = "50px";
-
-
-let button = document.createElement("button");
-button.textContent = "click this";
-button.backgroundColor = "white";
-button.addEventListener("click", () => {
-    length = Number(prompt("enter length"));
-    draw(length);
-});
-housing.appendChild(button);
 
 
 document.body.appendChild(housing);
