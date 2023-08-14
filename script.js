@@ -3,14 +3,24 @@
     muchubatactics 14/08/23
 */
 
+//global
+let len;
+let bool = false;
 
+document.body.addEventListener("mousedown", () =>{
+    bool = true;
+});
+document.body.addEventListener("mouseup", () =>{
+    bool = false;
+});
 
 //sketching
-let length;
+
 let container = document.querySelector(".container");
 
 function draw(length)
 {
+    clear();
     if(!length) length = 16;
     for (let i = 0; i < length; ++i)
     {
@@ -20,17 +30,16 @@ function draw(length)
         for (let a = 0; a < length; ++a)
         {
             let b = document.createElement("div");
-            b.style.width = "30px"
-            b.style.height = "30px";
+            b.style.width = String((700/length) - 2) + "px";
+            b.style.height = String((700/length) - 2) + "px";
             b.style.backgroundColor = "gray";
+            b.style.border = "1px solid black";
             // b.style.border = "5px solid white";
             b.addEventListener("mouseover", () => {
-                b.style.backgroundColor = "aqua";
-                console.log("mouseover");
-            });
-            b.addEventListener("mouseout", () => {
-                b.style.backgroundColor = "white";
-                console.log("mouseout");
+                if (bool)
+                {
+                    b.style.backgroundColor = "white";
+                }
             });
             div.appendChild(b);
         }
@@ -38,8 +47,46 @@ function draw(length)
     }
 
 }
+
+//utility functions
+
+function clear()
+{
+    let list = document.querySelectorAll(".container > div");
+    Array.from(list).forEach((item) => {
+        item.remove();
+    });
+}
+
+function reset()
+{
+    clear();
+    draw(len);
+}
+
+
 //buttons
+let controlPanel = document.querySelector(".controls");
 
+let sizeButton = document.createElement("button");
+sizeButton.textContent = "set size";
+sizeButton.addEventListener("click", () => {
+    len = Number(prompt("Enter size", "a number not greater than 64"));
+    if (!len || len > 64 || len < 1)
+    {
+        len = 30;
+        alert("entered invalid number, size set to 30");
+    }
+    draw(len);
+});
 
-document.body.appendChild(housing);
+let resetButton = document.createElement("button");
+resetButton.textContent = "reset";
+resetButton.addEventListener("click", reset);
+
+controlPanel.appendChild(sizeButton);
+controlPanel.appendChild(resetButton);
+
+//run
+draw(60);
 
