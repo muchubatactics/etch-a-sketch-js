@@ -33,10 +33,9 @@ function draw(length)
             let b = document.createElement("div");
             b.style.width = String((700/length) - 2) + "px";
             b.style.height = String((700/length) - 2) + "px";
-            b.style.backgroundColor = "white";
+            b.style.backgroundColor = "rgb(255, 255, 255)";
             b.style.border = "1px solid rgb(156, 156, 156)";
             b.draggable = false;
-            // b.style.border = "5px solid white";
             b.addEventListener("mouseover", drawBlack);
             div.appendChild(b);
         }
@@ -52,7 +51,7 @@ function drawBlack()
 {
     if (bool)
     {
-        this.style.backgroundColor = "black";
+        this.style.backgroundColor = "rgb(0, 0, 0)";
     }
 }
 
@@ -60,8 +59,12 @@ function drawLighten()
 {
     if (bool)
     {
-        let color = getComputedStyle(this).color;
-        console.log(color);
+        let [r, g, b] = this.style.backgroundColor.match(/\d+/g);
+        r = Number(r); g = Number(g); b = Number(b);
+        r = Math.min(r + 25, 255);
+        g = Math.min(g + 25, 255);
+        b = Math.min(b + 25, 255);
+        this.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
     }
 }
 
@@ -69,7 +72,12 @@ function drawDarken()
 {
     if (bool)
     {
-
+        let [r, g, b] = this.style.backgroundColor.match(/\d+/g);
+        r = Number(r); g = Number(g); b = Number(b);
+        r = Math.max(r - 25, 0);
+        g = Math.max(g - 25, 0);
+        b = Math.max(b - 25, 0);
+        this.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
     }
 }
 
@@ -86,19 +94,19 @@ function randomColor()
     let number = Math.floor(Math.random() * 7);
     switch (number) {
         case 0:
-            return "red";
+            return "rgb(255, 0, 0)";
         case 1:
-            return "orange";
+            return "rgb(255, 165, 0)";
         case 2:
-            return "yellow";
+            return "rgb(255, 255, 0)";
         case 3:
-            return "lime";
+            return "rgb(0, 128, 0)";
         case 4:
-            return "blue";
+            return "rgb(0, 0, 255)";
         case 5:
             return "rgb(75, 0, 130)";
         case 6:
-            return "violet";  
+            return "rgb(238, 130, 238)";  
         default:
             break;
     }
@@ -116,6 +124,11 @@ function reset()
 {
     clear();
     draw(len);
+}
+
+function getRGBVersion()
+{
+
 }
 
 
