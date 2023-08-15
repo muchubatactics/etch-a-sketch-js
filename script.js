@@ -33,24 +33,76 @@ function draw(length)
             let b = document.createElement("div");
             b.style.width = String((700/length) - 2) + "px";
             b.style.height = String((700/length) - 2) + "px";
-            b.style.backgroundColor = "gray";
-            b.style.border = "1px solid cornsilk";
+            b.style.backgroundColor = "white";
+            b.style.border = "1px solid rgb(156, 156, 156)";
             b.draggable = false;
             // b.style.border = "5px solid white";
-            b.addEventListener("mouseover", () => {
-                if (bool)
-                {
-                    b.style.backgroundColor = "white";
-                }
-            });
+            b.addEventListener("mouseover", drawBlack);
             div.appendChild(b);
         }
+        div.draggable = false;
         container.appendChild(div);
     }
 
 }
 
 //utility functions
+
+function drawBlack()
+{
+    if (bool)
+    {
+        this.style.backgroundColor = "black";
+    }
+}
+
+function drawLighten()
+{
+    if (bool)
+    {
+        let color = getComputedStyle(this).color;
+        console.log(color);
+    }
+}
+
+function drawDarken()
+{
+    if (bool)
+    {
+
+    }
+}
+
+function drawRainbow()
+{
+    if (bool)
+    {
+        this.style.backgroundColor = randomColor();
+    }
+}
+
+function randomColor()
+{
+    let number = Math.floor(Math.random() * 7);
+    switch (number) {
+        case 0:
+            return "red";
+        case 1:
+            return "orange";
+        case 2:
+            return "yellow";
+        case 3:
+            return "lime";
+        case 4:
+            return "blue";
+        case 5:
+            return "rgb(75, 0, 130)";
+        case 6:
+            return "violet";  
+        default:
+            break;
+    }
+}
 
 function clear()
 {
@@ -86,8 +138,65 @@ let resetButton = document.createElement("button");
 resetButton.textContent = "reset";
 resetButton.addEventListener("click", reset);
 
+let rainbowMode = document.createElement("button");
+rainbowMode.textContent = "Toggle Rainbow";
+rainbowMode.addEventListener("click", () => {
+    let list = document.querySelectorAll(".container > div > div");
+    Array.from(list).forEach((box) => {
+        box.removeEventListener("mouseover", drawBlack);
+        box.removeEventListener("mouseover", drawDarken);
+        box.removeEventListener("mouseover", drawLighten);
+        box.addEventListener("mouseover", drawRainbow);
+    });
+
+});
+
+let lightenMode = document.createElement("button");
+lightenMode.textContent = "Toggle Lighten";
+lightenMode.addEventListener("click", () => {
+    let list = document.querySelectorAll(".container > div > div");
+    Array.from(list).forEach((box) => {
+        box.removeEventListener("mouseover", drawBlack);
+        box.removeEventListener("mouseover", drawDarken);
+        box.removeEventListener("mouseover", drawRainbow);
+        box.addEventListener("mouseover", drawLighten);
+    });
+
+});
+
+let darkenMode = document.createElement("button");
+darkenMode.textContent = "Toggle Darken";
+darkenMode.addEventListener("click", () => {
+    let list = document.querySelectorAll(".container > div > div");
+    Array.from(list).forEach((box) => {
+        box.removeEventListener("mouseover", drawBlack);
+        box.removeEventListener("mouseover", drawRainbow);
+        box.removeEventListener("mouseover", drawLighten);
+        box.addEventListener("mouseover", drawDarken);
+    });
+
+});
+
+let normalMode = document.createElement("button");
+normalMode.textContent = "Toggle Normal";
+normalMode.addEventListener("click", () => {
+    let list = document.querySelectorAll(".container > div > div");
+    Array.from(list).forEach((box) => {
+        box.removeEventListener("mouseover", drawDarken);
+        box.removeEventListener("mouseover", drawRainbow);
+        box.removeEventListener("mouseover", drawLighten);
+        box.addEventListener("mouseover", drawBlack);
+    });
+
+});
+
+
 controlPanel.appendChild(sizeButton);
 controlPanel.appendChild(resetButton);
+controlPanel.appendChild(rainbowMode);
+controlPanel.appendChild(darkenMode);
+controlPanel.appendChild(lightenMode);
+controlPanel.appendChild(normalMode);
 
 //run
 draw();

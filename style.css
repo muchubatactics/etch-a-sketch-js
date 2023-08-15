@@ -32,6 +32,7 @@ body {
     display: flex;
     padding: 20px;
     justify-content: space-around;
+
 }
 
 .container {
@@ -54,7 +55,7 @@ body {
 
 .controls button {
     border-radius: 30px;
-    width: 200px;
+    width: 250px;
     height: 50px;
     font-family: monospace;
     font-weight: lighter;
